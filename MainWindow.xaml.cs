@@ -77,15 +77,11 @@ namespace LottoWPF
         {
             try
             {
-                for (int i = 0; i < kuponer.Length; i++)
-                {
-                    FileSaver.Save(kuponer[i].SaveableCoupon, i + 1);
-                }
-
+                    FileSaver.Save(kuponer);   
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("You need to get some coupons before you can save them.","No coupons created", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error: {ex.Message}","Error in save", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
