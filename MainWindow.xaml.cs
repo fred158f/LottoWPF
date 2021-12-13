@@ -81,7 +81,7 @@ namespace LottoWPF
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}","Error in save", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Error: {ex.Message}","Error while saving", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

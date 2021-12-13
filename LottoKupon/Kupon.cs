@@ -9,69 +9,89 @@ namespace LottoWPF.LottoKupon
 {
     public class Kupon
     {
-        const int antal = 10;
-        Række[] rækkes = new Række[antal];
-        JokerRække[] joker = new JokerRække[2];
+        const int antalRækker = 10;
+        const int antalJokere = 2;
+        Række[] rækkes;
         public string Date { get; private set; }
         public string Coupon { get; private set; }
-        public string SaveableCoupon { get; private set; }
         private bool joke;
         public Kupon(bool wantJoke)
         {
+            rækkes = new Række[antalRækker + (wantJoke ? antalJokere : 0)];
+            Date = DateTime.Today.ToShortDateString();
             joke = wantJoke;
             CreateCoupon(joke);
-            SaveableCoupon = ToString();
+            Coupon = Printable();
         }
 
         public void CreateCoupon(bool joke)
         {
-            Date = DateTime.Today.ToShortDateString();
-
-            Coupon += $"Lotto {Date}\n\n1-uge\nLYN-LOTTO\n\n";
-
-            for (int i = 0; i < antal; i++)
+            for (int i = 0; i < rækkes.Length; i++)
             {
-                rækkes[i] = new LottoRække();
-                if (i != 0 && rækkes[i].Validate(rækkes) == false)
+                if (i < antalRækker)
                 {
-                    rækkes[i] = null;
-                    i--;
+                    rækkes[i] = new LottoRække();
+                    if (i != 0 && rækkes[i].Validate(rækkes) == false)
+                    {
+                        rækkes[i] = null;
+                        i--;
+                    }
                 }
-                Coupon += i < 9 ? $"  {i + 1}. " : $"{i + 1}. ";
-                Coupon += rækkes[i].ToString();
-                Coupon += "\n";
-            }
-
-
-            if (joke)
-            {
-                Coupon += "\n* * * * * * Joker Tal * * * * * * *\n";
-
-                for (int i = 0; i < joker.Length; i++)
+                else if (joke)
                 {
-                    joker[i] = new JokerRække();
-                    Coupon += joker[i].ToString();
-                    Coupon += "\n";
+                    rækkes[i] = new JokerRække();
                 }
-
             }
         }
 
-        public override string ToString()
+        public string Printable()
         {
-            string[] arr = Coupon.Split('\n');
             string final = "";
 
-            foreach(string s in arr)
+            string[] title = { $"Lotto {Date}\n\n", "1-uge\n", "LYN-LOTTO\n\n" };
+            string jokerTitle = "\n****** Joker Tal *******\n";
+
+            int cent = (rækkes[0].ToString().Length / 2) + 3;
+
+            final += Spaces(title, cent);
+
+            for (int i = 0; i < rækkes.Length; i++)
             {
-                if (s == arr[joke ? arr.Length-6 : arr.Length-1])
-                    final += " ";
-                final += $"{new string(' ', (20 - s.Length/2))}{s}\n";
+                if (i < antalRækker)
+                {
+                    final += Spaces((i < 9 ? $" {i + 1}. " : $"{i + 1}. ") + rækkes[i].ToString() + "\n", cent);
+
+                }
+                else if (joke)
+                {
+                    if (i == antalRækker)
+                        final += Spaces(jokerTitle, cent);
+                    final += Spaces(rækkes[i].ToString() + "\n", cent + 5);
+                }
             }
 
             return final;
         }
 
+        public override string ToString()
+        {
+            return Coupon;
+        }
+
+        public string Spaces(string[] strings, int center)
+        {
+            string final = "";
+            foreach(string s in strings)
+            {
+                final += $"{new string(' ', center - s.Length/2)}{s}";
+            }
+
+            return final;
+        }
+        public string Spaces(string strings, int center)
+        {
+            return $"{new string(' ', center - strings.Length/2)}{strings}";
+        }
 
     }
 }

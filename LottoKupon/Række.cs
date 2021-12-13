@@ -10,7 +10,7 @@ namespace LottoWPF.LottoKupon
 {
     public abstract class Række :  IValidateable
     {  
-        public abstract string Id { get; protected set; }
+        public string Id { get; protected set; }
         public Tal[] tals;
         public Række(int antalTal = 7)
         {

@@ -9,7 +9,6 @@ namespace LottoWPF.LottoKupon
 {
     class LottoRække : Række
     {
-        public override string Id{ get; protected set; }
         public LottoRække()
         {
             FillRække();
@@ -38,7 +37,7 @@ namespace LottoWPF.LottoKupon
             string result = "";
             foreach(Tal t in tals)
             {
-                result += $"{t.Værdi:0#}  ";
+                result += $"{t.Værdi:0#} ";
             }
             return result;
         }
