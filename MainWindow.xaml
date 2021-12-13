@@ -13,7 +13,6 @@
                 <TextBox x:Name="txtTwo" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="False" TextAlignment="Center" Width="160" FontFamily="Courier New"/>
                 <TextBox x:Name="txtThree" HorizontalAlignment="Center" VerticalAlignment="Top" IsEnabled="False" TextAlignment="Center" Margin="5,0,0,0" Width="160" FontFamily="Courier New"/>
             </StackPanel>
-            
         </ScrollViewer>
 
         <Rectangle HorizontalAlignment="Left" Height="auto" Width="200" Fill="WhiteSmoke"/>

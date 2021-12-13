@@ -10,19 +10,19 @@ namespace LottoWPF.LottoKupon
 
     class JokerRække : Række
     {
+        public override string Id { get; protected set; }
         public JokerRække()
         {
-            this.FillRække();
+            FillRække();
         }
 
         public override void FillRække()
         {
 
-            for (int i = 0; i < this.tals.Length; i++)
+            for (int i = 0; i < tals.Length; i++)
             {
-                this.tals[i] = new Tal(9);
-
-                this.Id += $"{tals[i].Værdi}";
+                tals[i] = new Tal(9);
+                Id += $"{tals[i].Værdi}";
             }
             Array.Sort(tals);
         }

@@ -77,7 +77,7 @@ namespace LottoWPF
         {
             try
             {
-                    FileSaver.Save(kuponer);   
+                FileSaver.Save(kuponer);   
             }
             catch (Exception ex)
             {
