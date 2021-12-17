@@ -49,9 +49,9 @@ namespace LottoWPF.LottoKupon
             string final = "";
 
             string[] title = { $"Lotto {Date}\n\n", "1-uge\n", "LYN-LOTTO\n\n" };
-            string jokerTitle = "\n****** Joker Tal *******\n";
+            string jokerTitle = "****** Joker Tal ******\n";
 
-            int cent = (rækkes[0].ToString().Length / 2) + 3;
+            int cent = (rækkes[0].ToString().Length / 2) + 4;
 
             final += Spaces(title, cent);
 
@@ -65,7 +65,7 @@ namespace LottoWPF.LottoKupon
                 else if (joke)
                 {
                     if (i == antalRækker)
-                        final += Spaces(jokerTitle, cent);
+                        final += "\n"+Spaces(jokerTitle, cent);
                     final += Spaces(rækkes[i].ToString() + "\n", cent + 5);
                 }
             }

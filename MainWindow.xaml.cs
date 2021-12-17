@@ -48,7 +48,7 @@ namespace LottoWPF
             txtOne.Clear();
             txtTwo.Clear();
             txtThree.Clear();
-            string sep = "\n________________________________\n";
+            string sep = "\n_____________________________\n";
 
             for (int i = 0; i < kupons.Length; i++)
             {
